@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KCA Central Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #007bff;
+            --bg: #f4f7fa;
+            --card-bg: #ffffff;
+            --text-main: #2d3436;
+            --text-sub: #636e72;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            margin: 0;
+            padding: 20px;
+            color: var(--text-main);
+        }
+
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+        }
+
+        /* Header Dashboard */
+        .header {
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: white;
+            padding: 35px 25px;
+            border-radius: 28px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 25px rgba(0, 123, 255, 0.25);
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 1.7rem;
+            font-weight: 700;
+        }
+
+        .header p {
+            margin: 8px 0 0;
+            opacity: 0.85;
+            font-size: 0.9rem;
+        }
+
+        /* Lingkaran Dekorasi Header */
+        .header::after {
+            content: '';
+            position: absolute;
+            right: -20px;
+            top: -20px;
+            width: 100px;
+            height: 100px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+        }
+
+        /* Menu List */
+        .menu-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        /* Card Style */
+        .menu-card {
+            background: var(--card-bg);
+            padding: 18px;
+            border-radius: 20px;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            align-items: center;
+            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(0,0,0,0.03);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+        }
+
+        .menu-card:active {
+            transform: scale(0.95);
+            background-color: #fcfcfc;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .icon-box {
+            width: 56px;
+            height: 56px;
+            background: #f0f7ff;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            margin-right: 18px;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+        }
+
+        .content {
+            flex: 1;
+        }
+
+        .content b {
+            display: block;
+            font-size: 1.05rem;
+            color: var(--text-main);
+            margin-bottom: 2px;
+        }
+
+        .content small {
+            color: var(--text-sub);
+            font-size: 0.82rem;
+            line-height: 1.4;
+        }
+
+        .arrow-icon {
+            color: #d1d8e0;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        /* Badge Coming Soon */
+        .soon {
+            font-size: 0.65rem;
+            background: #f1f2f6;
+            color: #a4b0be;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .disabled {
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+        .footer {
+            margin-top: 50px;
+            text-align: center;
+            font-size: 0.75rem;
+            color: #bdc3c7;
+            letter-spacing: 0.5px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>KCA CENTRAL</h1>
+        <p>Manajemen Kios Citra Abadi</p>
+    </div>
+
+    <div class="menu-list">
+        <a href="/harga" class="menu-card">
+            <div class="icon-box">🏷️</div>
+            <div class="content">
+                <b>Daftar Harga Barang</b>
+                <small>Cek & edit katalog harga eceran</small>
+            </div>
+            <div class="arrow-icon">→</div>
+
+        <a href="/stock" class="menu-card">
+            <div class="icon-box">📦</div>
+            <div class="content">
+              <b>Manajemen Stock Karton</b>
+              <small>Update stock gudang & riwayat kartonan</small>
+            </div>
+            <div class="arrow-icon">→</div>
+
+        <a href="/keuangan" class="menu-card">
+             <div class="icon-box">💰</div>
+            <div class="content">
+              <b>Catat Hasil Harian</b>
+              <small>Input pendapatan kotor & cek riwayat kas</small>
+            </div>
+              <div class="arrow-icon">→</div>
+        </a>
+
+
+    <div class="footer">
+        Lorem Ipsum Dolor Sit Amet<br>
+        Powered by NodeJS & Termux & Vibe coding by Gemini<br>
+        v1.0 • 2026
+    </div>
+</div>
+
+</body>
+</html>

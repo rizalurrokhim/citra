@@ -1,0 +1,29 @@
+tanggal,nama,aksi,jumlah,keterangan
+1/4/2026,Cocobit Splash Lychee,Baru,1,Pendaftaran barang baru
+1/4/2026,Floridina ,Baru,7,Pendaftaran barang baru
+1/4/2026,Sprite botol 250 ml,Baru,2,Pendaftaran barang baru
+1/4/2026,Mizone 500 ml,Baru,7,Pendaftaran barang baru
+1/4/2026,Teh Gelas,Baru,28,Pendaftaran barang baru
+1/4/2026,Cocobit Splash Coco,Baru,1,Pendaftaran barang baru
+1/4/2026,BMW M3,Baru,1,Pendaftaran barang baru
+1/4/2026,BMW M3,Keluar,-1,Terjual 
+1/4/2026,,Masuk,+12,Datang 
+1/4/2026,,Masuk,+12,Datang 
+1/4/2026,,Masuk,+12,Datang dari agen
+1/4/2026,Teh Gelas,Baru,28,Pendaftaran barang baru
+1/4/2026,,Masuk,+2,Datang
+1/4/2026,Teh Gelas,Masuk,+2,Datang
+1/4/2026,Teh Gelas,Keluar,-2,Keluar
+1/4/2026,Teh Gelas,Keluar,-2,Laku
+1/4/2026,Supra,Baru,12,Pendaftaran barang baru
+1/4/2026,Mazda cx7,Baru,2,Pendaftaran barang baru
+1/4/2026,Mazda cx7,Masuk,+12,"Baru dari distributor jp
+"
+1/4/2026,Mazda cx7,Masuk,+12,"Baru dari distributor jp
+"
+1/4/2026,Mazda cx7,Masuk,+12,"Baru dari distributor jp
+"
+1/4/2026,Mazda cx7,Keluar,-20,Distribusi ke daler indonesia timur
+"1/4/2026, 16.43.14",Mazda cx7,Hapus,-,Barang dihapus
+"1/4/2026, 16.47.33",Supra,Hapus,-,Barang dihapus
+"1/4/2026, 19.02.32",Aqua 600 ml,Baru,17,Pendaftaran baru

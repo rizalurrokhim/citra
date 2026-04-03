@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kios Citra Abadi - Daftar Harga</title>
+    <style>
+        body { font-family: sans-serif; margin: 0; background: #f0f2f5; padding: 15px; }
+        
+        /* Header & Back Button */
+        .header { display: flex; justify-content: space-between; align-items: center; background: #007bff; color: white; padding: 12px 15px; border-radius: 12px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,123,255,0.2); }
+        
+        .btn-back { 
+            text-decoration: none; 
+            color: #007bff; 
+            background: white;
+            width: 38px;
+            height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            font-size: 20px;
+            font-weight: bold;
+            margin-right: 12px;
+            transition: 0.2s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .btn-back:active { transform: scale(0.9); background: #eef2f7; }
+
+        /* Buttons Group */
+        .btn-group { display: flex; gap: 10px; margin-bottom: 15px; }
+        .btn-add { background: #28a745; color: white; border: none; padding: 12px; border-radius: 8px; cursor: pointer; font-weight: bold; flex: 1; transition: 0.2s; }
+        .btn-add:active { transform: scale(0.95); }
+        .btn-backup { background: #6c757d; color: white; border: none; padding: 12px; border-radius: 8px; cursor: pointer; flex: 1; transition: 0.2s; }
+        .btn-backup:active { transform: scale(0.95); }
+
+        /* Search & List */
+        .search-bar { width: 100%; padding: 15px; margin-bottom: 15px; border: 2px solid #ddd; border-radius: 10px; box-sizing: border-box; font-size: 16px; outline: none; }
+        .search-bar:focus { border-color: #007bff; }
+        
+        .item-list { background: white; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); overflow: hidden; }
+        .item { display: flex; justify-content: space-between; padding: 15px; border-bottom: 1px solid #eee; align-items: center; }
+        .item:last-child { border-bottom: none; }
+
+        /* Dropdown Menu */
+        .menu-container { position: relative; }
+        .dots { cursor: pointer; padding: 10px; font-size: 20px; color: #888; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; }
+        .dots:active { background: #f0f0f0; }
+        .dropdown { display: none; position: absolute; right: 0; top: 35px; background: white; min-width: 130px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); z-index: 100; border: 1px solid #eee; overflow: hidden; }
+        .dropdown a { display: block; padding: 12px 15px; text-decoration: none; color: #333; font-size: 14px; border-bottom: 1px solid #f8f9fa; }
+        .dropdown a:last-child { border-bottom: none; }
+        .dropdown a:hover { background: #f8f9fa; }
+        .show { display: block; }
+
+        /* Modal & Overlay */
+        .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 150; backdrop-filter: blur(2px); }
+        .modal { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 25px; border-radius: 20px; width: 88%; max-width: 400px; z-index: 200; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+        .modal h3 { margin-top: 0; color: #2d3436; }
+        .modal label { font-size: 0.85rem; color: #636e72; font-weight: bold; }
+        .modal input { width: 100%; padding: 12px; margin: 6px 0 16px 0; border: 1px solid #ddd; border-radius: 10px; box-sizing: border-box; outline: none; font-size: 16px; }
+        .modal input:focus { border-color: #007bff; }
+    </style>
+</head>
+<body>
+
+<div class="overlay" id="overlay" onclick="closeModal()"></div>
+
+<div class="header">
+    <div style="display: flex; align-items: center;">
+        <a href="/" class="btn-back">🏠</a>
+        <h2 style="margin:0; font-size: 1.1rem; letter-spacing: 0.5px;">DAFTAR HARGA</h2>
+    </div>
+    <div style="width: 32px; height: 32px; background: rgba(255,255,255,0.2); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: bold;">KCA</div>
+</div>
+
+<div class="btn-group">
+    <button class="btn-add" onclick="openModal()">+ Tambah Harga</button>
+    <button class="btn-backup" onclick="doBackup()">💾 Backup</button>
+</div>
+
+<input type="text" id="searchInput" class="search-bar" placeholder="Cari nama barang...">
+
+<div class="item-list">
+    <% items.forEach(function(item) { %>
+    <div class="item">
+        <div>
+            <strong class="name-text" style="color: #2d3436;"><%= item.nama %></strong>
+            <small style="display:block; color:#636e72; margin-top: 3px;">Rp <%= item.harga %> | Exp: <%= item.exp || '-' %></small>
+        </div>
+        <div class="menu-container">
+            <div class="dots" onclick="toggleMenu(event, this)">⋮</div>
+            <div class="dropdown">
+                <a href="#" onclick="prepareEdit('<%= item.nama %>', '<%= item.harga %>', '<%= item.exp %>')">✏️ Edit Harga</a>
+                <a href="#" onclick="confirmDelete('<%= item.nama %>')" style="color:red">🗑️ Hapus Data</a>
+            </div>
+        </div>
+    </div>
+    <% }); %>
+</div>
+
+<div class="modal" id="modal">
+    <h3 id="modalTitle">Tambah Data</h3>
+    <form id="itemForm" action="/harga/add" method="POST">
+        <input type="hidden" name="nama_lama" id="inNamaLama">
+        <label>Nama Barang</label>
+        <input type="text" name="nama" id="inNama" required autocomplete="off">
+        <label>Harga (Rp)</label>
+        <input type="text" name="harga" id="inHarga" required placeholder="Contoh: 5.000">
+        <label>Expired (Bulan/Tahun)</label>
+        <input type="text" name="exp" id="inExp" placeholder="12/26">
+        <div style="display:flex; gap:10px; margin-top: 10px;">
+            <button type="submit" class="btn-add" style="flex: 2;">Simpan</button>
+            <button type="button" onclick="closeModal()" style="flex:1; border-radius:8px; border:1px solid #ddd; background: #f8f9fa;">Batal</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    // Live Search
+    document.getElementById('searchInput').addEventListener('input', function() {
+        let filter = this.value.toLowerCase();
+        let items = document.querySelectorAll('.item');
+        items.forEach(item => {
+            let name = item.querySelector('.name-text').innerText.toLowerCase();
+            item.style.display = name.includes(filter) ? "flex" : "none";
+        });
+    });
+
+    function toggleMenu(e, el) {
+        e.stopPropagation();
+        document.querySelectorAll('.dropdown').forEach(d => d.classList.remove('show'));
+        el.nextElementSibling.classList.toggle('show');
+    }
+
+    window.onclick = () => document.querySelectorAll('.dropdown').forEach(d => d.classList.remove('show'));
+
+    function openModal() {
+        document.getElementById('modal').style.display = 'block';
+        document.getElementById('overlay').style.display = 'block';
+        document.getElementById('itemForm').action = "/harga/add";
+        document.getElementById('modalTitle').innerText = "Tambah Harga";
+        document.getElementById('itemForm').reset();
+    }
+
+    function closeModal() {
+        document.getElementById('modal').style.display = 'none';
+        document.getElementById('overlay').style.display = 'none';
+    }
+
+    function prepareEdit(nama, harga, exp) {
+        openModal();
+        document.getElementById('itemForm').action = "/harga/edit";
+        document.getElementById('modalTitle').innerText = "Edit Harga";
+        document.getElementById('inNamaLama').value = nama;
+        document.getElementById('inNama').value = nama;
+        document.getElementById('inHarga').value = harga;
+        document.getElementById('inExp').value = exp;
+    }
+
+    function confirmDelete(nama) {
+        if(confirm("Hapus " + nama + " dari daftar harga?")) {
+            window.location.href = "/harga/delete/" + encodeURIComponent(nama);
+        }
+    }
+
+    function doBackup() {
+        fetch('/harga/backup', {method:'POST'}).then(() => alert('Backup Data Harga Berhasil!'));
+    }
+</script>
+</body>
+</html>

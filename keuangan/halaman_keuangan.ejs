@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KCA - Keuangan</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background: #f0f2f5; padding: 15px; margin: 0; color: #2d3436; }
+        .header { background: #2d3436; color: white; padding: 15px; border-radius: 12px; display: flex; align-items: center; margin-bottom: 15px; }
+        .btn-back { text-decoration: none; background: rgba(255,255,255,0.2); color: white; width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; border-radius: 10px; margin-right: 12px; }
+        
+        .card { background: white; padding: 20px; border-radius: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); margin-bottom: 15px; }
+        
+        /* Input & Label */
+        label { display:block; margin-bottom: 8px; font-weight: bold; color: #636e72; font-size: 0.9rem; }
+        input { width: 100%; padding: 15px; font-size: 1.3rem; border: 2px solid #dfe6e9; border-radius: 12px; margin-bottom: 5px; box-sizing: border-box; font-weight: bold; color: #2d3436; }
+        input:focus { border-color: #28a745; outline: none; }
+        
+        .preview-rp { font-size: 0.9rem; color: #28a745; font-weight: bold; margin-bottom: 15px; display: block; }
+        
+        .btn-save { background: #28a745; color: white; border: none; width: 100%; padding: 16px; border-radius: 12px; font-weight: bold; font-size: 1.1rem; cursor: pointer; transition: 0.2s; }
+        .btn-save:active { transform: scale(0.98); }
+
+        /* Riwayat List */
+        .item-log { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-bottom: 1px solid #f1f3f5; }
+        .date { color: #636e72; font-size: 0.85rem; flex: 1; }
+        .money { 
+            color: #2d3436; 
+            font-weight: 800; 
+            font-family: 'Courier New', Courier, monospace; 
+            background: #f8f9fa; 
+            padding: 5px 10px; 
+            border-radius: 8px;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <a href="/" class="btn-back">🏠</a>
+    <div>
+        <h2 style="margin:0; font-size: 1.1rem;">CATATAN KAS KCA</h2>
+        <small style="opacity: 0.8;">Input Pendapatan Kotor</small>
+    </div>
+</div>
+
+<div class="card">
+    <form action="/keuangan/simpan" method="POST">
+        <label>HASIL HARI INI:</label>
+        <input type="number" name="pendapatan" id="inputDuit" placeholder="Contoh: 50000" required oninput="updatePreview()">
+        <span id="preview" class="preview-rp">Rp. 0,-</span>
+        <button type="submit" class="btn-save">SIMPAN DATA</button>
+    </form>
+</div>
+
+<div class="card">
+    <h3 style="margin-top: 0; font-size: 1rem; border-bottom: 2px solid #f0f2f5; padding-bottom: 10px;">RIWAYAT MASUK</h3>
+    <div id="logContainer">
+        <% if (history && history.length > 0) { %>
+            <% history.forEach(log => { %>
+                <div class="item-log">
+                    <span class="date"><%= log.Tanggal %></span>
+                    <span class="money">Rp. <%= parseInt(log.Pendapatan).toLocaleString('id-ID') %>,-</span>
+                </div>
+            <% }) %>
+        <% } else { %>
+            <p style="text-align:center; color:#b2bec3;">Belum ada catatan.</p>
+        <% } %>
+    </div>
+</div>
+
+<script>
+    // Fungsi biar pas ngetik langsung muncul format Rupiah di bawah input
+    function updatePreview() {
+        let angka = document.getElementById('inputDuit').value;
+        let preview = document.getElementById('preview');
+        
+        if (angka) {
+            let format = new Intl.NumberFormat('id-ID').format(angka);
+            preview.innerText = "Rp. " + format + ",-";
+        } else {
+            preview.innerText = "Rp. 0,-";
+        }
+    }
+</script>
+
+</body>
+</html>
