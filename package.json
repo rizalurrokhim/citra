@@ -1,4 +1,10 @@
 {
+  "name": "kca-inventory",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
   "dependencies": {
     "body-parser": "^2.2.2",
     "csv-parser": "^3.2.0",
